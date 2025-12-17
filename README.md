@@ -527,7 +527,6 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 **Documentación técnica:**
 - [PHP Manual - Password Hashing](https://www.php.net/manual/es/function.password-hash.php)
 - [PHP Manual - Sessions](https://www.php.net/manual/es/book.session.php)
-- [OWASP - Session Management](https://owasp.org/www-project-web-security-testing-guide/)
 - [PDO Prepared Statements](https://www.php.net/manual/es/pdo.prepared-statements.php)
 
 ---
