@@ -469,28 +469,20 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 
    ```bash
    # Laragon
-   cp -r Login-MVC C:/laragon/www/
+   C:/laragon/www/
    
    # XAMPP
-   cp -r Login-MVC C:/xampp/htdocs/
+   C:/xampp/htdocs/
    ```
 
 3. **Importar la base de datos:**
    
-   **Opción A - Usando phpMyAdmin:**
-   - Abrir phpMyAdmin (http://localhost/phpmyadmin)
-   - Crear una nueva base de datos llamada `login-php`
-   - Ir a la pestaña "Importar"
-   - Seleccionar el archivo `database/login-php.sql`
-   - Clic en "Continuar"
-
-   **Opción B - Usando línea de comandos:**
-
-   > <sub>bash</sub>
-
-   ```bash
-   mysql -u root -p < database/login-php.sql
-   ```
+   - **Usando phpMyAdmin:**
+     - Abrir phpMyAdmin (http://localhost/phpmyadmin)
+     - Crear una nueva base de datos llamada `login-php`
+     - Ir a la pestaña "Importar"
+     - Seleccionar el archivo `database/login-php.sql`
+     - Clic en "Continuar"
 
 4. **Configurar la conexión** en `Config/Database.php`:
 
@@ -503,7 +495,7 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
    private $password = '95f90HZJy3sb';
    ```
 
-6. **Acceder a la aplicación:**
+5. **Acceder a la aplicación:**
    ```
    http://localhost/Login-MVC/
    ```
