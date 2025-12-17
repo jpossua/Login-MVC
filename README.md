@@ -1,4 +1,4 @@
-# Login MVC Seguro - PHP + MariaDB
+# Ejercicio Práctico N°1 - Aplicación de Login MVC Seguro - PHP + MariaDB
 
 Sistema de autenticación seguro implementado con el patrón **Modelo-Vista-Controlador (MVC)** en PHP, siguiendo las mejores prácticas de seguridad web.
 
