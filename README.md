@@ -82,27 +82,28 @@ Login-MVC/
 
 ```
 ┌─────────────────┐
-│   index.php     │  ← Front Controller
+│   index.php     │  ← Controlador Frontal (punto de entrada)
 │ (enrutamiento)  │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│ SessionConfig   │  ← Configura sesión segura
-│ SecurityHelper  │  ← Funciones de seguridad
+│ SessionConfig   │  ← Configura sesión segura (cookies, tokens)
+│ SecurityHelper  │  ← Funciones de seguridad (sanitización, CSRF)
 └────────┬────────┘
          │
          ▼
-┌─────────────────┐     ┌─────────────────┐
-│ AuthController  │────▶│   User.php      │
-│  (Controlador)  │     │   (Modelo)      │
-└────────┬────────┘     └────────┬────────┘
-         │                       │
-         ▼                       ▼
-┌─────────────────┐     ┌─────────────────┐
-│    Vistas       │     │   Base Datos    │
-│ login/registro/ │     │   (MariaDB)     │
-│   dashboard     │     └─────────────────┘
+┌─────────────────┐                          ┌─────────────────┐
+│ AuthController  │  ← Lógica de aplicación   │   User.php      │  ← Acceso a datos
+│  (Controlador)  │    (procesa peticiones)  │   (Modelo)      │    (consultas BD)
+│                 │────────────────────────▶ │                 │
+└────────┬────────┘                          └────────┬────────┘
+         │                                            │
+         ▼                                            ▼
+┌─────────────────┐                          ┌─────────────────┐
+│    Vistas       │  ← Interfaz de usuario   │   Base Datos    │  ← Almacenamiento
+│ login/registro/ │    (HTML/CSS/JS)         │   (MariaDB)     │    (persistencia)
+│   dashboard     │                          └─────────────────┘
 └─────────────────┘
 ```
 
@@ -116,7 +117,7 @@ La validación en el lado del cliente permite dar feedback inmediato al usuario 
 
 **Archivo:** `Views/js/validarDatos.js`
 
-> <small><small>javascript</small></small>
+> <sub>javascript</sub>
 
 ```javascript
 // Requisitos de contraseña:
@@ -144,7 +145,7 @@ La sanitización en el servidor es obligatoria para prevenir ataques XSS (Cross-
 
 **Archivo:** `Config/SecurityHelper.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 public static function sanitizeInput($data)
@@ -164,7 +165,7 @@ Configuramos las cookies de sesión con parámetros de seguridad para prevenir a
 
 **Archivo:** `Config/SessionConfig.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 session_set_cookie_params([
@@ -190,7 +191,7 @@ El token CSRF (Cross-Site Request Forgery) protege contra ataques donde un sitio
 
 **Generación** (`Config/SessionConfig.php`):
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 if (empty($_SESSION['csrf_token'])) {
@@ -201,7 +202,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 **En el formulario** (`Views/login.php`):
 
-> <small><small>html</small></small>
+> <sub>html</sub>
 
 ```html
 <input type="hidden" name="csrf_token" 
@@ -210,7 +211,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 **Validación** (`Config/SecurityHelper.php`):
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 public static function validateCSRFToken()
@@ -230,7 +231,7 @@ Establecemos un tiempo máximo absoluto de sesión de 2 horas. Aunque el usuario
 
 **Archivo:** `Config/SessionConfig.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 $session_max_lifetime = 7200;  // 2 horas = 7200 segundos
@@ -255,7 +256,7 @@ Regeneramos el ID de sesión periódicamente para prevenir ataques de fijación 
 
 **Archivo:** `Config/SessionConfig.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 $regenerate_interval = 1200;  // 20 minutos
@@ -278,7 +279,7 @@ Implementamos un límite de intentos de login fallidos para prevenir ataques de 
 
 **Archivo:** `Config/SecurityHelper.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -308,7 +309,7 @@ Las contraseñas NUNCA se almacenan en texto plano. Usamos `password_hash()` con
 
 **Archivo:** `Controllers/AuthController.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 // En el registro, hasheamos la contraseña
@@ -317,7 +318,7 @@ $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 **Archivo:** `Models/User.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 // En el login, verificamos con password_verify()
@@ -334,7 +335,7 @@ Usamos PDO (PHP Data Objects) con consultas preparadas para prevenir ataques de 
 
 **Archivo:** `Models/User.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 // SEGURO: Consulta preparada con placeholder
@@ -352,7 +353,7 @@ El cierre de sesión debe ser completo: no basta con destruir la sesión, tambi�
 
 **Archivo:** `Controllers/AuthController.php`
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 public function logout()
@@ -386,7 +387,7 @@ Esta funcionalidad opcional (Puntos 9 y 10 del ejercicio anterior) permite que l
 
 **Tabla SQL:**
 
-> <small><small>sql</small></small>
+> <sub>sql</sub>
 
 ```sql
 ALTER TABLE usuarios ADD COLUMN admitido TINYINT(1) DEFAULT 0;
@@ -394,7 +395,7 @@ ALTER TABLE usuarios ADD COLUMN admitido TINYINT(1) DEFAULT 0;
 
 **Verificación en login** (`Controllers/AuthController.php`):
 
-> <small><small>php</small></small>
+> <sub>php</sub>
 
 ```php
 if (isset($user['admitido']) && $user['admitido'] != 1) {
@@ -425,7 +426,7 @@ La base de datos utiliza una única tabla `usuarios` que almacena toda la inform
 | `apellidos` | VARCHAR(100)         | Apellidos del usuario                              |
 | `admitido`  | TINYINT(1) DEFAULT 0 | 0 = pendiente de aprobación, 1 = aprobado          |
 
-> <small><small>sql</small></small>
+> <sub>sql</sub>
 
 ```sql
 CREATE TABLE usuarios (
@@ -440,7 +441,7 @@ CREATE TABLE usuarios (
 
 ### Usuario de Prueba
 
-> <small><small>sql</small></small>
+> <sub>sql</sub>
 
 ```sql
 -- Primero, genera el hash de la contraseña en PHP:
@@ -456,7 +457,7 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 
 1. **Clonar el repositorio:**
 
-   > <small><small>bash</small></small>
+   > <sub>bash</sub>
 
    ```bash
    git clone https://github.com/jpossua/Login-MVC.git
@@ -464,7 +465,7 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 
 2. **Copiar a la carpeta del servidor web:**
 
-   > <small><small>bash</small></small>
+   > <sub>bash</sub>
 
    ```bash
    # Laragon
@@ -485,7 +486,7 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 
    **Opción B - Usando línea de comandos:**
 
-   > <small><small>bash</small></small>
+   > <sub>bash</sub>
 
    ```bash
    mysql -u root -p < database/login-php.sql
@@ -493,7 +494,7 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
 
 4. **Configurar la conexión** en `Config/Database.php`:
 
-   > <small><small>php</small></small>
+   > <sub>php</sub>
 
    ```php
    private $host = 'localhost';
