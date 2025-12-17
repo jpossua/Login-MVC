@@ -475,6 +475,27 @@ VALUES ('test@test.com', '$2y$10$...hash...', 'Usuario', 'Prueba', 1);
    C:/xampp/htdocs/
    ```
 
+### 4. Configuración de la Base de Datos
+1. Abre phpMyAdmin (http://localhost/phpmyadmin).
+2. Crea una nueva base de datos llamada `login-php`.
+3. Importa el archivo SQL proporcionado: `database/login-php.sql`.
+4. **IMPORTANTE:** Crea un usuario de base de datos (por ejemplo, `LoginPhp`) y asígnale los permisos necesarios.
+
+#### Permisos Requeridos
+El usuario de la base DEBE tener los siguientes permisos sobre la base de datos `login-php`:
+
+| **Permiso** |                                  **Propósito**                                  |
+| :---------: | :-----------------------------------------------------------------------------: |
+| **SELECT**  | Necesario para verificar credenciales (login) y comprobar si un usuario existe. |
+| **INSERT**  |                    Necesario para registrar nuevos usuarios.                    |
+| **UPDATE**  |   Necesario para futuras funcionalidades (reset de password, editar perfil).    |
+| **DELETE**  |             Opcional. Necesario si implementas borrado de usuarios.             |
+
+**Comando SQL para otorgar permisos:**
+```sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON `login-php`.* TO 'LoginPhp'@'localhost';
+FLUSH PRIVILEGES;
+```
 3. **Importar la base de datos:**
    
    - **Usando phpMyAdmin:**
