@@ -82,27 +82,27 @@ Login-MVC/
 
 ```
 ┌─────────────────┐
-│   index.php     │  ← Controlador Frontal (punto de entrada)
+│    index.php    │  ← Controlador Frontal (punto de entrada)
 │ (enrutamiento)  │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│ SessionConfig   │  ← Configura sesión segura (cookies, tokens)
+│  SessionConfig  │  ← Configura sesión segura (cookies, tokens)
 │ SecurityHelper  │  ← Funciones de seguridad (sanitización, CSRF)
 └────────┬────────┘
          │
          ▼
+┌─────────────────┐                            ┌─────────────────┐
+│ AuthController  │  ← Lógica de aplicación    │    User.php     │  ← Acceso a datos
+│  (Controlador)  │    (procesa peticiones)    │    (Modelo)     │    (consultas BD)
+│                 ├────────────────────────▶   └────────┬────────┘
+└────────┬────────┘                                     │
+         │                                              │
+         ▼                                              ▼
 ┌─────────────────┐                          ┌─────────────────┐
-│ AuthController  │  ← Lógica de aplicación   │   User.php      │  ← Acceso a datos
-│  (Controlador)  │    (procesa peticiones)  │   (Modelo)      │    (consultas BD)
-│                 │────────────────────────▶ │                 │
-└────────┬────────┘                          └────────┬────────┘
-         │                                            │
-         ▼                                            ▼
-┌─────────────────┐                          ┌─────────────────┐
-│    Vistas       │  ← Interfaz de usuario   │   Base Datos    │  ← Almacenamiento
-│ login/registro/ │    (HTML/CSS/JS)         │   (MariaDB)     │    (persistencia)
+│     Vistas      │  ← Interfaz de usuario   │   Base Datos    │  ← Almacenamiento
+│ login/registro/ │    (HTML/CSS/JS)         │    (MariaDB)    │    (persistencia)
 │   dashboard     │                          └─────────────────┘
 └─────────────────┘
 ```
