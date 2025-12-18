@@ -116,6 +116,7 @@ class Usuario
 
     // ============================================
     // MÉTODO: REGISTER (Registrar nuevo usuario)
+    // FUNCIONALIDAD OPCIONAL - Puntos 9 y 10 del ejercicio
     // ============================================
 
     /**

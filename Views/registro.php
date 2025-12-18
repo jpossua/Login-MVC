@@ -4,6 +4,8 @@
  * ============================================
  * VISTA: REGISTRO (Formulario de Registro de Usuario)
  * ============================================
+ * FUNCIONALIDAD OPCIONAL - Puntos 9 y 10 del ejercicio
+ * ============================================
  * 
  * Esta vista muestra el formulario de registro de nuevos usuarios.
  * Incluye:
@@ -12,7 +14,7 @@
  * - Campo para nombre
  * - Campo para apellidos
  * - Token CSRF oculto (seguridad)
- * - Información sobre aprobación de admin
+ * - Información sobre aprobación de admin (Punto 10 - OPCIONAL)
  * 
  * Los usuarios nuevos se crean con admitido=0 (pendiente de aprobación)
  */

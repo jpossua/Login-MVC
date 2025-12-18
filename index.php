@@ -66,8 +66,8 @@ $controller = new AuthController();
  * - ?action=authenticate -> Procesa el login
  * - ?action=dashboard   -> Página de bienvenida (requiere autenticación)
  * - ?action=logout      -> Cierra la sesión
- * - ?action=showRegister -> Muestra formulario de registro
- * - ?action=register    -> Procesa el registro
+ * - ?action=showRegister -> Muestra formulario de registro (OPCIONAL - Punto 9)
+ * - ?action=register    -> Procesa el registro (OPCIONAL - Puntos 9 y 10)
  */
 if (!isset($_REQUEST['action'])) {
     // Primera visita: mostrar formulario de login
@@ -97,12 +97,12 @@ if (!isset($_REQUEST['action'])) {
             break;
 
         case 'showRegister':
-            // Mostrar formulario de registro
+            // OPCIONAL - Punto 9: Mostrar formulario de registro
             $controller->showRegister();
             break;
 
         case 'register':
-            // Procesar registro de nuevo usuario
+            // OPCIONAL - Puntos 9 y 10: Procesar registro de nuevo usuario
             $controller->register();
             break;
 

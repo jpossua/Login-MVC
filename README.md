@@ -273,9 +273,9 @@ if (time() - $_SESSION['last_regeneration'] >= $regenerate_interval) {
 
 ---
 
-### 7. Control de Intentos de Login (máximo 5) - OPCIONAL
+### 7. Control de Intentos de Login (máximo 5)
 
-Implementamos un límite de intentos de login fallidos para prevenir ataques de fuerza bruta. Después de 5 intentos fallidos, el usuario queda bloqueado durante 15 minutos. Esta funcionalidad es opcional según el enunciado.
+Implementamos un límite de intentos de login fallidos para prevenir ataques de fuerza bruta. Después de 5 intentos fallidos, el usuario queda bloqueado durante 15 minutos.
 
 **Archivo:** `Config/SecurityHelper.php`
 
@@ -381,9 +381,24 @@ public function logout()
 
 ---
 
-### 11. Campo 'admitido' para Aprobación de Admin - OPCIONAL
+### 11. Registro de Usuario - OPCIONAL (Punto 9 del ejercicio)
 
-Esta funcionalidad opcional (Puntos 9 y 10 del ejercicio anterior) permite que los usuarios se registren pero no puedan acceder hasta que un administrador los apruebe. Los nuevos usuarios se crean con `admitido=0` y solo pueden hacer login cuando un admin cambia el valor a `1`.
+Esta funcionalidad **OPCIONAL** permite a los usuarios registrarse en la aplicación mediante un formulario. Incluye:
+- Validación de ID de usuario (8-15 caracteres)
+- Validación de contraseña con requisitos de seguridad
+- Hash seguro de la contraseña con `password_hash()`
+- Verificación de usuario duplicado
+
+**Archivos involucrados:**
+- `Views/registro.php` - Formulario de registro
+- `Controllers/AuthController.php` - Métodos `showRegister()` y `register()`
+- `Models/User.php` - Método `register()`
+
+---
+
+### 12. Campo 'admitido' para Aprobación de Admin - OPCIONAL (Punto 10 del ejercicio)
+
+Esta funcionalidad **OPCIONAL** permite que los usuarios se registren pero no puedan acceder hasta que un administrador los apruebe. Los nuevos usuarios se crean con `admitido=0` y solo pueden hacer login cuando un admin cambia el valor a `1`.
 
 **Tabla SQL:**
 

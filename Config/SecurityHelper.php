@@ -101,10 +101,10 @@ class SecurityHelper
     }
 
     // ============================================
-    // CONTROL DE INTENTOS DE LOGIN (OPCIONAL)
+    // CONTROL DE INTENTOS DE LOGIN (Punto 8 del ejercicio)
     // ============================================
-    // Esta funcionalidad es OPCIONAL según el enunciado:
-    // "control de límite de intentos de acceso (opcional)"
+    // Esta funcionalidad implementa el control de límite de intentos de acceso
+    // para prevenir ataques de fuerza bruta
 
     /**
      * Verifica si el usuario está bloqueado por exceso de intentos fallidos
