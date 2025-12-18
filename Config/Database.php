@@ -113,7 +113,9 @@ class Database
              * Registrar en log y mostrar mensaje genérico.
              */
             error_log("Error de conexión a BD: " . $exception->getMessage());
-            echo "Error de conexión a la base de datos. Por favor, contacte al administrador.";
+            echo '<div class="alert alert-danger text-center m-5" role="alert">
+                    Error de conexión a la base de datos. Por favor, contacte al administrador.
+                  </div>';
         }
 
         return $this->PDO;
